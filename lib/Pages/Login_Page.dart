@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:yourworkoutroutine/Services/auth.dart';
-import 'dart:io';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,26 +9,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final Authenticate _auth = Authenticate();
-
-  void somethin() {
-    _auth._handleSignIn();
-  }
+  void SignIn() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login Page'),
+        title: Text('Login'),
       ),
       body: Center(
         child: Column(
           children: [
             ElevatedButton(
-                onPressed: () {
-                  somethin();
-                },
-                child: Text("child"))
+                onPressed: () => AuthService().signInWithGoogle(),
+                child: Text('Login')),
           ],
         ),
       ),
