@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "992536521888",
+    "project_id": "yourworkoutroutine-40292",
+    "storage_bucket": "yourworkoutroutine-40292.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992536521888:android:a07363faca3f9dc9be2dc5",
+        "android_client_info": {
+          "package_name": "com.yourworkoutroutine.yourworkoutroutine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992536521888-nnab78lfst55fs15a3qvtgs95g6u0ra6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjA2mp7THImps6dJ1Q8EXTTREapBFT6Ys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992536521888-nnab78lfst55fs15a3qvtgs95g6u0ra6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
