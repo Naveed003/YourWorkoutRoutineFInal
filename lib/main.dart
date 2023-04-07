@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:yourworkoutroutine/Pages/Login_Page.dart';
+import 'package:yourworkoutroutine/Pages/splash_screen.dart';
 import 'package:yourworkoutroutine/Services/wrapper.dart';
 import 'firebase_options.dart';
 
@@ -18,7 +19,7 @@ void main() async {
   runApp(
     const MaterialApp(
       title: 'Google Sign In',
-      home: Wrapper(),
+      home: SplashScreen(),
     ),
   );
 }
@@ -40,9 +41,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('HomePage'),
-        actions: [IconButton(onPressed: signUserOut, icon: Icon(Icons.logout))],
+        actions: [
+          IconButton(onPressed: signUserOut, icon: Icon(Icons.fitness_center))
+        ],
       ),
       body: Center(child: Text("Logged in as " + user.email!)),
     );

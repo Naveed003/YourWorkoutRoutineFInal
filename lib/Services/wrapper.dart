@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:yourworkoutroutine/Pages/Login_Page.dart';
+import 'package:yourworkoutroutine/Services/login_or_register.dart';
 
 import 'package:yourworkoutroutine/main.dart';
 
@@ -16,7 +17,7 @@ class Wrapper extends StatelessWidget {
           if (snapshot.hasData) {
             return HomePage();
           } else {
-            return LoginPage();
+            return LoginOrRegister();
           }
         },
       ),
