@@ -83,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: emailController,
                   hintText: 'Email ID',
                   obscureText: false,
+                  horPadding: 25.0,
                 ),
                 const SizedBox(
                   height: 10,
@@ -91,6 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: pwdController,
                   hintText: 'Password',
                   obscureText: true,
+                  horPadding: 25.0,
                 ),
                 const SizedBox(
                   height: 10,

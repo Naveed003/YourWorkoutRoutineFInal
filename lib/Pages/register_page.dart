@@ -19,7 +19,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final pwdController = TextEditingController();
   final confirmPwdController = TextEditingController();
 
-  void SignUp() async {
+  void signUp() async {
     showDialog(
         context: context,
         builder: (context) {
@@ -88,6 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: emailController,
                   hintText: 'Email ID',
                   obscureText: false,
+                  horPadding: 25.0,
                 ),
                 const SizedBox(
                   height: 10,
@@ -96,6 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: pwdController,
                   hintText: 'Password',
                   obscureText: true,
+                  horPadding: 25.0,
                 ),
                 const SizedBox(
                   height: 10,
@@ -104,12 +106,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: confirmPwdController,
                   hintText: 'Confirm Password',
                   obscureText: true,
+                  horPadding: 25.0,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 // const SizedBox(height: 10)
-                MyButton(onTap: SignUp, txt: 'Sign Up'),
+                MyButton(onTap: signUp, txt: 'Sign Up'),
                 const SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
