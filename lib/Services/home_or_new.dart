@@ -14,7 +14,7 @@ class HomeOrNew extends StatefulWidget {
 class _HomeOrNewState extends State<HomeOrNew> {
   bool check = false;
 
-  void toggle() {
+  toggle() {
     setState(() {});
   }
 
@@ -28,8 +28,9 @@ class _HomeOrNewState extends State<HomeOrNew> {
         future: ref.child('USERS/$uID').get(),
         builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
           if (snapshot.hasData && snapshot.data!.exists) {
-            return HomePage();
+            return const HomePage();
           } else {
+            // ignore: void_checks
             return NewUser(tog: toggle);
           }
         });

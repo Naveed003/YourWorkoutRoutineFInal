@@ -16,7 +16,6 @@ class _MyDropDownMenuState extends State<MyDropDownMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final double WIDTH = MediaQuery.of(context).size.width;
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -25,7 +24,7 @@ class _MyDropDownMenuState extends State<MyDropDownMenu> {
         height: 60,
         child: DropdownButtonFormField(
           value: widget.controller.text,
-          icon: Icon(Icons.arrow_drop_down),
+          icon: const Icon(Icons.arrow_drop_down),
           items: const [
             DropdownMenuItem(
               value: 'Male',

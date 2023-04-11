@@ -42,6 +42,10 @@ dependencies:
   firebase_core: ^2.9.0
   google_fonts: ^4.0.3
   intl: ^0.17.0
+  camera: ^0.10.3+2
+  path_provider: ^2.0.14
+  path:
+  image_picker: ^0.8.7+2
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +88,9 @@ flutter:
     - family: Anton
       fonts:
         - asset: assets/fonts/Anton-Regular.ttf
+    - family: AsapCondensed
+      fonts:
+        - asset: assets/fonts/AsapCondensed-Regular.ttf
 
   #   - family: Trajan Pro
   #     fonts:

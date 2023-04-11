@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class MyCustomeDatePicker extends StatefulWidget {
-  final controller;
+  final TextEditingController controller;
   final String label;
   final double width;
   const MyCustomeDatePicker({
@@ -19,7 +19,6 @@ class MyCustomeDatePicker extends StatefulWidget {
 class _MyCustomeDatePickerState extends State<MyCustomeDatePicker> {
   @override
   Widget build(BuildContext context) {
-    final double WIDTH = MediaQuery.of(context).size.width;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: SizedBox(

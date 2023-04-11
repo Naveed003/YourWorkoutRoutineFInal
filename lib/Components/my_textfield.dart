@@ -38,7 +38,7 @@ class MyTextField extends StatelessWidget {
 }
 
 class MyTextFormField extends StatelessWidget {
-  final controller;
+  final TextEditingController controller;
   final String hintText;
   final double horPadding;
   final bool enableCheck;

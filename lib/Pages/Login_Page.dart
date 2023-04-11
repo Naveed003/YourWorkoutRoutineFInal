@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final pwdController = TextEditingController();
 
-  void SignIn() async {
+  void signIn() async {
     showDialog(
         context: context,
         builder: (context) {
@@ -30,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: pwdController.text);
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
@@ -108,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 10),
                 MyButton(
-                  onTap: SignIn,
+                  onTap: signIn,
                   txt: 'Sign In',
                 ),
                 const SizedBox(height: 50),
@@ -139,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 50),
-                MySquareTile(
+                MyCircleTile(
                   imagePath: 'assets/images/google.png',
                   onTap: AuthService().signInWithGoogle,
                 ),

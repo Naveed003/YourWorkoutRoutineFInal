@@ -1,12 +1,17 @@
-import 'dart:ffi';
+// ignore_for_file: non_constant_identifier_names
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:yourworkoutroutine/Components/check_box.dart';
 import 'package:yourworkoutroutine/Components/date_picker.dart';
 import 'package:yourworkoutroutine/Components/drop_down.dart';
+import 'package:yourworkoutroutine/Components/my_squaretile.dart';
 import 'package:yourworkoutroutine/Components/my_textfield.dart';
-import 'package:yourworkoutroutine/Services/auth.dart';
+import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
 
 class NewUser extends StatefulWidget {
   final void tog;
@@ -23,32 +28,88 @@ class _NewUserState extends State<NewUser> {
   final sexController = TextEditingController();
   final weightController = TextEditingController();
   final heightController = TextEditingController();
+  final sitUpsCount = TextEditingController();
 
   final user = FirebaseAuth.instance.currentUser!;
+  File? img1;
+  File? img2;
+
+  File? img3;
+
   var name = [];
+  var images = <File?>[null, null, null];
+  var healthController = <TextEditingController>[
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+  ];
 
   getProfileImage() {
     if (user.photoURL != null) {
       return NetworkImage(user.photoURL!);
     } else {
-      return AssetImage('assets/images/person2.png');
+      return const AssetImage('assets/images/person2.png');
     }
+  }
+
+  void submit() {
+    if (nameController.text == null ||
+        emailController.text == null ||
+        dobController.text == null ||
+        sexController.text == null ||
+        weightController.text == null ||
+        heightController.text == null ||
+        images[0] == null ||
+        images[1] == null ||
+        images[2] == null ||
+        sitUpsCount.text == null) {
+      wrongMessage('Fill in the missing fields');
+    }
+  }
+
+  void wrongMessage(String message) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              backgroundColor: Colors.yellow[800],
+              title: Center(
+                child: Text(
+                  message,
+                  style: const TextStyle(color: Colors.black),
+                ),
+              ));
+        });
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     emailController.text = user.email!;
     sexController.text = "Male";
     if (user.displayName != null) {
       nameController.text = user.displayName!;
       name.addAll(['Full Name', '', false]);
     } else {
-      print('fgd');
       name.addAll(['Full Name', '', true]);
+    }
+    for (var i = 0; i < 4; i++) {
+      healthController[i].text = 'false';
     }
 
     super.initState();
+  }
+
+  Future getImage(int i) async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image == null) return;
+
+    final imageTemporary = File(image.path);
+
+    images[i] = imageTemporary;
+    print(image.path);
+
+    setState(() {});
   }
 
   @override
@@ -102,7 +163,7 @@ class _NewUserState extends State<NewUser> {
                       )),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: SizedBox(
                     width: (WIDTH - 50),
                     height: 50,
@@ -169,9 +230,97 @@ class _NewUserState extends State<NewUser> {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Health  Conditions',
+                  style: TextStyle(
+                    fontFamily: 'AsapCondensed',
+                    fontSize: WIDTH * 5 / 100,
+                  ),
+                ),
+                Wrap(
+                  spacing: 5.0,
+                  runSpacing: 5.0,
+                  children: [
+                    MyCheckBox(controller: healthController[0], label: 'Heart'),
+                    MyCheckBox(
+                        controller: healthController[1], label: 'Breathing'),
+                    MyCheckBox(
+                        controller: healthController[2], label: 'Diabetics'),
+                    MyCheckBox(
+                        controller: healthController[3], label: 'Hormonal'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    MySquareTile(
+                      image: images[0],
+                      onTap: () => getImage(0),
+                      width: WIDTH,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    MySquareTile(
+                      image: images[1],
+                      onTap: () => getImage(1),
+                      width: WIDTH,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    MySquareTile(
+                      image: images[2],
+                      onTap: () => getImage(2),
+                      width: WIDTH,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: SizedBox(
+                          width: (WIDTH - 50 - 10) / 2,
+                          height: 50,
+                          child: MyTextFormField(
+                            controller: sitUpsCount,
+                            labelText: 'Sit ups Count',
+                            hintText: '',
+                            horPadding: 0,
+                            enableCheck: true,
+                            keyboardType: const TextInputType.numberWithOptions(
+                                signed: false, decimal: true),
+                          )),
+                    ),
+                    GestureDetector(
+                      onTap: () => submit(),
+                      child: Container(
+                        margin: EdgeInsets.all(20),
+                        child: const Text(
+                          'Submit Now',
+                          style: TextStyle(
+                            fontFamily: 'Anton',
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
                 GestureDetector(
                   onTap: () => FirebaseAuth.instance.signOut(),
-                  child: Text("gfd"),
+                  // onTap: () {
+                  //   for (var i = 0; i < 4; i++) {
+                  //     print(healthController[i].text + i.toString());
+                  //   }
+                  // },
+                  child: const Text("gfd"),
                 )
               ],
             ),
