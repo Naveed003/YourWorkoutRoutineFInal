@@ -15,11 +15,11 @@ class MyCheckBox extends StatefulWidget {
 
 class _MyCheckBoxState extends State<MyCheckBox> {
   Color getColor(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.hovered,
-      MaterialState.focused,
-    };
+    // const Set<MaterialState> interactiveStates = <MaterialState>{
+    //   MaterialState.pressed,
+    //   MaterialState.hovered,
+    //   MaterialState.focused,
+    // };
 
     return Colors.brown.shade700;
   }

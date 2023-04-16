@@ -11,8 +11,6 @@ import 'package:yourworkoutroutine/Components/my_textfield.dart';
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-
 class NewUser extends StatefulWidget {
   final void tog;
   const NewUser({super.key, required this.tog});
@@ -54,16 +52,16 @@ class _NewUserState extends State<NewUser> {
   }
 
   void submit() {
-    if (nameController.text == null ||
-        emailController.text == null ||
-        dobController.text == null ||
-        sexController.text == null ||
-        weightController.text == null ||
-        heightController.text == null ||
+    if (nameController.text == '' ||
+        emailController.text == '' ||
+        dobController.text == '' ||
+        sexController.text == '' ||
+        weightController.text == '' ||
+        heightController.text == '' ||
         images[0] == null ||
         images[1] == null ||
         images[2] == null ||
-        sitUpsCount.text == null) {
+        sitUpsCount.text == '') {
       wrongMessage('Fill in the missing fields');
     }
   }
@@ -73,7 +71,7 @@ class _NewUserState extends State<NewUser> {
         context: context,
         builder: (context) {
           return AlertDialog(
-              backgroundColor: Colors.yellow[800],
+              backgroundColor: Colors.grey[400],
               title: Center(
                 child: Text(
                   message,
@@ -107,7 +105,6 @@ class _NewUserState extends State<NewUser> {
     final imageTemporary = File(image.path);
 
     images[i] = imageTemporary;
-    print(image.path);
 
     setState(() {});
   }
@@ -278,7 +275,7 @@ class _NewUserState extends State<NewUser> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
@@ -301,27 +298,28 @@ class _NewUserState extends State<NewUser> {
                     GestureDetector(
                       onTap: () => submit(),
                       child: Container(
-                        margin: EdgeInsets.all(20),
-                        child: const Text(
+                        margin: const EdgeInsets.all(20),
+                        child: Text(
                           'Submit Now',
                           style: TextStyle(
                             fontFamily: 'Anton',
                             fontSize: 20,
+                            color: Colors.brown[700],
                           ),
                         ),
                       ),
                     )
                   ],
                 ),
-                GestureDetector(
-                  onTap: () => FirebaseAuth.instance.signOut(),
-                  // onTap: () {
-                  //   for (var i = 0; i < 4; i++) {
-                  //     print(healthController[i].text + i.toString());
-                  //   }
-                  // },
-                  child: const Text("gfd"),
-                )
+                // GestureDetector(
+                //   onTap: () => FirebaseAuth.instance.signOut(),
+                //   // onTap: () {
+                //   //   for (var i = 0; i < 4; i++) {
+                //   //     print(healthController[i].text + i.toString());
+                //   //   }
+                //   // },
+                //   child: const Text("gfd"),
+                // )
               ],
             ),
           ),
