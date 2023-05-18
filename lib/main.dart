@@ -1,48 +1,48 @@
-import 'package:fitness/calendar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:yourworkoutroutine/Pages/splash_screen.dart';
+import 'firebase_options.dart';
 
-
-void main() => runApp(MaterialApp(
-  home: Home()
-));
-
-class Home extends StatefulWidget {
-
-  @override
-  State<Home> createState() => _HomeState();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(
+    const MaterialApp(
+      title: 'Google Sign In',
+      home: SplashScreen(),
+    ),
+  );
 }
 
-class _HomeState extends State<Home> {
-  int currentIndex =0;
-  final screens = [
-    Center(child: Text('Home'),),
-    Center(child: Text('Health'),),
-    CalendarPage(),
-    Center(child: Text('User'),)
-  ];
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  void signUserOut() {
+    FirebaseAuth.instance.signOut();
+  }
+
+  final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-
-        body:screens[currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.black,
-          showUnselectedLabels: false,
-            currentIndex: currentIndex,
-            onTap: (index) => setState(() =>currentIndex = index),
-            items:[
-              BottomNavigationBarItem(icon: Icon(Icons.home),
-                  label: 'Home'),
-              BottomNavigationBarItem(icon: Icon(Icons.analytics),
-                  label: 'fav'),
-              BottomNavigationBarItem(icon: Icon(Icons.calendar_month),
-                  label: 'person'),
-              BottomNavigationBarItem(icon: Icon(Icons.person),
-                  label: 'person')
-            ] ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: const Text('HomePage'),
+        actions: [
+          IconButton(
+              onPressed: signUserOut, icon: const Icon(Icons.fitness_center))
+        ],
       ),
+      body: Center(child: Text("Logged in as ${user.email!}")),
     );
   }
 }
-
